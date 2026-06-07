@@ -1,54 +1,93 @@
 from BaseClasses import MultiWorld, Region, Entrance, Location, ItemClassification
-from .Locations import LB1Location, level_beaten_event_location_table
+from .Locations import LB1Location, event_location_table
 from .Items import LB1Item
+from .Names import RegionName
 
 
 lb1_hub_regions = [
-    "Batcave",
-    "Arkham Asylum",
-    "Shop"
+    RegionName.bc,
+    RegionName.aa,
+    RegionName.sh,
 ]
 
 lb1_hero_regions = [
-    "You can Bank on Batman",
-    "An Icy Reception",
-    "Two-Face Chase",
-    "A Poisonous Appointment",
-    "The Face-Off",
-    "There She Goes Again",
-    "Batboat Battle",
-    "Under the City",
-    "Zoo's Company",
-    "Penguin's Lair",
-    "Joker's Home Turf",
-    "Little Fun at the Big Top",
-    "Flight of the Bat",
-    "In the Dark Night",
-    "To the Top of the Tower",
+    RegionName.ycbob,
+    RegionName.air,
+    RegionName.tfc,
+    RegionName.apa,
+    RegionName.tfo,
+    RegionName.tsga,
+    RegionName.bbb,
+    RegionName.utc,
+    RegionName.zc,
+    RegionName.pl,
+    RegionName.jht,
+    RegionName.lfabt,
+    RegionName.fotb,
+    RegionName.itdn,
+    RegionName.tttot,
 ]
 
 lb1_villain_regions = [
-    "The Riddler Makes a Withdrawal",
-    "On the Rocks",
-    "Green Fingers",
-    "An Enterprising Theft",
-    "Breaking Blocks",
-    "Rockin' the Docks",
-    "Stealing the Show",
-    "Harbouring a Grudge",
-    "A Daring Rescue",
-    "Arctic World",
-    "A Surprise for the Commissioner",
-    "Biplane Blast",
-    "The Joker's Masterpiece",
-    "The Lure of the Night",
-    "Dying of Laughter",
+    RegionName.trmaw,
+    RegionName.otr,
+    RegionName.gf,
+    RegionName.aet,
+    RegionName.bb,
+    RegionName.rtd,
+    RegionName.sts,
+    RegionName.hag,
+    RegionName.adr,
+    RegionName.aw,
+    RegionName.asftc,
+    RegionName.bbpl,
+    RegionName.tjm,
+    RegionName.tlotn,
+    RegionName.dol,
+]
+
+lb1_hero_subregions = [
+    RegionName.ycbobf,
+    RegionName.airf,
+    RegionName.tfcf,
+    RegionName.apaf,
+    RegionName.tfof,
+    RegionName.tsgaf,
+    RegionName.bbbf,
+    RegionName.utcf,
+    RegionName.zcf,
+    RegionName.plf,
+    # RegionName.jhtf,
+    RegionName.lfabtf,
+    # RegionName.fotbf,
+    RegionName.itdnf,
+    RegionName.tttotf,
+]
+
+lb1_villain_subregions = [
+    RegionName.trmawf,
+    RegionName.otrf,
+    RegionName.gff,
+    # RegionName.aetf,
+    RegionName.bbf,
+    RegionName.rtdf,
+    RegionName.stsf,
+    RegionName.hagf,
+    RegionName.adrf,
+    RegionName.awf,
+    RegionName.asftcf,
+    RegionName.bbplf,
+    RegionName.tjmf,
+    RegionName.tlotnf,
+    RegionName.dolf,
 ]
 
 lb1_all_regions = [
     *lb1_hub_regions,
     *lb1_hero_regions,
     *lb1_villain_regions,
+    *lb1_hero_subregions,
+    *lb1_villain_subregions,
 ]
 
 
@@ -59,15 +98,44 @@ def create_regions(world: MultiWorld, player: int, seed_locations):
     for region in lb1_all_regions:
         create_regions_and_locations(region, player, world, seed_locations)
 
-    connect_regions(world, player, "Menu", "Batcave")
-    connect_regions(world, player, "Batcave", "Arkham Asylum")
-    connect_regions(world, player, "Batcave", "Shop")
+    connect_regions(world, player, "Menu", RegionName.bc)
+    connect_regions(world, player, RegionName.bc, RegionName.aa)
+    connect_regions(world, player, RegionName.bc, RegionName.sh)
 
     for region in lb1_hero_regions:
-        connect_regions(world, player, "Batcave", region)
+        connect_regions(world, player, RegionName.bc, region)
 
     for region in lb1_villain_regions:
-        connect_regions(world, player, "Arkham Asylum", region)
+        connect_regions(world, player, RegionName.aa, region)
+
+    connect_regions(world, player, RegionName.ycbob, RegionName.ycbobf)
+    connect_regions(world, player, RegionName.air, RegionName.airf)
+    connect_regions(world, player, RegionName.tfc, RegionName.tfcf)
+    connect_regions(world, player, RegionName.apa, RegionName.apaf)
+    connect_regions(world, player, RegionName.tfo, RegionName.tfof)
+    connect_regions(world, player, RegionName.tsga, RegionName.tsgaf)
+    connect_regions(world, player, RegionName.bbb, RegionName.bbbf)
+    connect_regions(world, player, RegionName.utc, RegionName.utcf)
+    connect_regions(world, player, RegionName.zc, RegionName.zcf)
+    connect_regions(world, player, RegionName.pl, RegionName.plf)
+    connect_regions(world, player, RegionName.lfabt, RegionName.lfabtf)
+    connect_regions(world, player, RegionName.itdn, RegionName.itdnf)
+    connect_regions(world, player, RegionName.tttot, RegionName.tttotf)
+
+    connect_regions(world, player, RegionName.trmaw, RegionName.trmawf)
+    connect_regions(world, player, RegionName.otr, RegionName.otrf)
+    connect_regions(world, player, RegionName.gf, RegionName.gff)
+    connect_regions(world, player, RegionName.bb, RegionName.bbf)
+    connect_regions(world, player, RegionName.rtd, RegionName.rtdf)
+    connect_regions(world, player, RegionName.sts, RegionName.stsf)
+    connect_regions(world, player, RegionName.hag, RegionName.hagf)
+    connect_regions(world, player, RegionName.adr, RegionName.adrf)
+    connect_regions(world, player, RegionName.aw, RegionName.awf)
+    connect_regions(world, player, RegionName.asftc, RegionName.asftcf)
+    connect_regions(world, player, RegionName.bbpl, RegionName.bbplf)
+    connect_regions(world, player, RegionName.tjm, RegionName.tjmf)
+    connect_regions(world, player, RegionName.tlotn, RegionName.tlotnf)
+    connect_regions(world, player, RegionName.dol, RegionName.dolf)
 
 
 def connect_regions(world: MultiWorld, player: int, source: str, target: str) -> Entrance:
@@ -91,8 +159,8 @@ def create_regions_and_locations(name: str, player: int, world: MultiWorld, seed
 def create_events(world: MultiWorld, player: int) -> int:
     count = 0
 
-    for (name, data) in level_beaten_event_location_table.items():
-        item_name = "Level Beaten"
+    for (name, data) in event_location_table.items():
+        item_name = "Level Beaten Token"
         event: Location = create_event(name, item_name, world.get_region(data.region, player), player)
         event.show_in_spoiler = True
         count += 1
